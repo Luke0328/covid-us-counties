@@ -29,23 +29,30 @@ boulder_data['new cases'] = boulder_data['cases']
 for i in range(1, len(boulder_data)):
 	boulder_data.loc[i, 'new cases'] -= boulder_data.loc[i - 1, 'cases']
 
+# Convert to datetime objects and sort
 boulder_data.date = pd.to_datetime(boulder_data.date)
 boulder_data.sort_values('date', inplace=True)
 
+# Store x and y axis data into variables
 case_date = boulder_data.date
 case_count = boulder_data['new cases']
 
+# Change plot visual style
 plt.style.use('seaborn')
 
+# Plot the data, passing in the variables storing data for the x and y axes
 plt.plot_date(case_date, case_count, linestyle='solid')
 
+# Create a line showing when the Colorado Stay-At-Home Order was Implemented
 plt.axvline(datetime(2020, 3, 25), -2, 45,
 	label='Statewide Stay-At-Home Order Implemented', color='r')
 
+# Set the title and axes labels
 plt.title('New COVID-19 Cases in Boulder County by Date')
 plt.xlabel('Date')
 plt.ylabel('Number of Cases')
 
+# Autoformat the x-axis dates
 plt.gcf().autofmt_xdate()
 plt.tight_layout()
 

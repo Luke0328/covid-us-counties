@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from matplotlib import dates as mpl_dates
 
 # Read csv file into variable us_county_data
-file_path = '/Users/lukepan/Documents/Projects/covid_counties/us-counties.csv'
+file_path = '/Users/lukepan/Documents/Projects/covid-us-counties/us-counties.csv'
 us_county_data = pd.read_csv(file_path)
 
 # Calculate the number of null values in each column and display with a DataFrame

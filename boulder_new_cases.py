@@ -43,7 +43,7 @@ plt.style.use('seaborn')
 # Plot the data, passing in the variables storing data for the x and y axes
 plt.plot_date(case_date, case_count, linestyle='solid')
 
-# Create a line showing when the Colorado Stay-At-Home Order was Implemented
+# Create a vertical line showing when the Colorado Stay-At-Home Order was Implemented
 plt.axvline(datetime(2020, 3, 25), -2, 45,
 	label='Statewide Stay-At-Home Order Implemented', color='r')
 

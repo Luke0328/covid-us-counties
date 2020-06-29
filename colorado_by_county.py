@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
 from matplotlib import pyplot as plt 
-from matplotlib import dates as mpl_dates
 
 # Read csv file into variable us_county_data
 file_path = '/Users/lukepan/Documents/Projects/covid-us-counties/us-counties.csv'
@@ -29,3 +27,24 @@ total_cases = colorado_data.loc[us_county_data.date == selected_date].cases.sum(
 
 # Adjust the county_cases_list such that it contains the percentage of cases in each county
 adjusted_county_cases_list = [round(i / total_cases * 100, 1) for i in county_cases_list]
+
+# Add a element "Other" for counties not selected in the county_name_list 
+other_counties = 100
+for percentage in adjusted_county_cases_list:
+	other_counties -= percentage
+county_name_list.append('Other')
+adjusted_county_cases_list.append(other_counties)
+
+# Change plot visual style
+plt.style.use("fivethirtyeight")
+
+# Generate the pie chart with county and percentage labels
+plt.pie(adjusted_county_cases_list, labels=county_name_list, shadow=True, autopct='%1.1f%%')
+
+# Set the title
+plt.title('Percentage of Colorado COVID-19 Cases by County')
+
+plt.tight_layout()
+
+plt.show()
+

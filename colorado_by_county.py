@@ -11,7 +11,7 @@ us_county_data.fips = us_county_data.fips.fillna('Unknown')
 
 # Create variables to store data
 selected_date = '2020-06-19'
-county_name_list = ['Boulder','Denver', 'Jefferson']
+county_name_list = ['Denver', 'Arapahoe', 'Adams', 'Weld', 'Jefferson', 'El Paso']
 county_cases_list = []
 
 # Extract Colorado data
@@ -39,7 +39,7 @@ adjusted_county_cases_list.append(other_counties)
 plt.style.use("fivethirtyeight")
 
 # Generate the pie chart with county and percentage labels
-plt.pie(adjusted_county_cases_list, labels=county_name_list, shadow=True, autopct='%1.1f%%')
+plt.pie(adjusted_county_cases_list, labels=county_name_list, autopct='%1.1f%%')
 
 # Set the title
 plt.title('Percentage of Colorado COVID-19 Cases by County')

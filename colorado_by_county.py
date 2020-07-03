@@ -1,12 +1,9 @@
 import numpy as np
 from matplotlib import pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 import pandas as pd
 import tkinter as tk
-
-# Create and name root window
-root = tk.Tk()
-root.title("Colorado COVID-19 Cases")
 
 # Read csv file into variable us_county_data
 file_path = '/Users/lukepan/Documents/Projects/covid-us-counties/us-counties.csv'
@@ -14,6 +11,10 @@ us_county_data = pd.read_csv(file_path)
 
 # Replace null values (in fips) with Unknown
 us_county_data.fips = us_county_data.fips.fillna('Unknown')
+
+# Create and name root window
+root = tk.Tk()
+root.title("Colorado COVID-19 Cases")
 
 # Create variables to store data
 selected_date = '2020-06-19'
@@ -45,33 +46,32 @@ adjusted_county_cases_list.append(other_counties)
 plt.style.use("fivethirtyeight")
 
 # Generate the pie chart with county and percentage labels
-fig = plt.pie(adjusted_county_cases_list, labels=county_name_list, autopct='%1.1f%%')
-
-# Set the title and layout
-plt.title('Percentage of Colorado COVID-19 Cases by County')
+fig = Figure(figsize=(4, 4), dpi=100)
+subplot = fig.add_subplot()
+subplot.pie(adjusted_county_cases_list, labels=county_name_list, autopct='%1.1f%%')
 plt.tight_layout()
 
 def search_date(entry):
 	print('Button Clicked', entry)
 
-canvas = tk.Canvas(root, height=500, width=500)
+canvas = tk.Canvas(root, height=700, width=700)
 canvas.pack()
 
 frame = tk.Frame(root, bg='blue')
-frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+
+label = tk.Label(frame, text='Show Colorado COVID-19 cases by County', font=('Times New Roman', 20))
+label.place(anchor='n', relx=0.5, rely=0.05)
 
 entry = tk.Entry(frame)
-entry.grid(column=0, row=1, pady=10, padx=0)
+entry.place(anchor='n', relx=0.5, rely=0.13)
 
 button = tk.Button(frame, text="Get Graph", font=('Times New Roman', 16), 
 	command=lambda: search_date(entry.get()))
-button.grid(column=1, row=1, pady=10, padx=0)
-
-label = tk.Label(frame, text='Show Colorado COVID-19 cases by County', font=('Times New Roman', 20))
-label.grid(column=0, columnspan=2, row=0, pady=10, padx=10)
+button.place(anchor='n', relx=0.5, rely=0.2)
 
 chart = FigureCanvasTkAgg(fig, master=frame)
 chart.draw()
-chart.get_tk_widget().pack()
+chart.get_tk_widget().place(anchor='n', relx=0.5, rely=0.3)
 
 root.mainloop()

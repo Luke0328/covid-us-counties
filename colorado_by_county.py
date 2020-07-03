@@ -18,7 +18,6 @@ us_county_data.fips = us_county_data.fips.fillna('Unknown')
 
 # Create a figure
 fig = Figure(figsize=(5, 5), dpi=100)
-ax = fig.add_subplot(111)
 plt.tight_layout()
 
 def generate_pie_chart(entry_date):
@@ -61,25 +60,32 @@ def generate_pie_chart(entry_date):
 	ax = fig.add_subplot(111)
 	ax.pie(adjusted_county_cases_list, labels=county_name_list, autopct='%1.1f%%')
 
+	# Embed the graph into the tkinter window
 	chart = FigureCanvasTkAgg(fig, frame)
 	chart.draw()
 	chart.get_tk_widget().place(anchor='n', relx=0.5, rely=0.25)
 
 def search_date(date):
+
 	generate_pie_chart(date)
 
+# Create and place a background canvas
 canvas = tk.Canvas(root, height=700, width=700)
 canvas.pack()
 
+# Create and place a frame
 frame = tk.Frame(root)
 frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
 
-label = tk.Label(frame, text='Show Colorado COVID-19 cases by County', font=('Times New Roman', 25))
+# Create and place a heading
+label = tk.Label(frame, text='Show Percentage of Colorado COVID-19 cases by County', font=('Times New Roman', 25))
 label.place(anchor='n', relx=0.5, rely=0.05)
 
+# Create and place an entry bar
 entry = tk.Entry(frame)
 entry.place(anchor='n', relx=0.5, rely=0.13)
 
+# Create and place a button
 button = tk.Button(frame, text="Get Graph", font=('Times New Roman', 16), 
 	command=lambda: search_date(entry.get()))
 button.place(anchor='n', relx=0.5, rely=0.2)

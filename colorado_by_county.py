@@ -78,7 +78,8 @@ frame = tk.Frame(root)
 frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
 
 # Create and place a heading
-label = tk.Label(frame, text='Show Percentage of Colorado COVID-19 cases by County', font=('Times New Roman', 25))
+label = tk.Label(frame, text='Show Percentage of Colorado COVID-19 cases by County', 
+	font=('Times New Roman', 25))
 label.place(anchor='n', relx=0.5, rely=0.05)
 
 # Create and place an entry bar

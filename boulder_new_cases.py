@@ -1,8 +1,8 @@
-import numpy as np
-import pandas as pd
 from datetime import datetime, timedelta
 from matplotlib import pyplot as plt 
 from matplotlib import dates as mpl_dates
+import numpy as np
+import pandas as pd
 
 # Read csv file into variable us_county_data
 file_path = '/Users/lukepan/Documents/Projects/covid-us-counties/us-counties.csv'
@@ -33,7 +33,7 @@ for i in range(1, len(boulder_data)):
 boulder_data.date = pd.to_datetime(boulder_data.date)
 boulder_data.sort_values('date', inplace=True)
 
-# Store x and y axis data into variables
+# Store x and y-axis data into variables
 case_date = boulder_data.date
 case_count = boulder_data['new cases']
 
